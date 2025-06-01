@@ -1,73 +1,164 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&display=swap');
-
-body {
-  background-color: #0a0a0a;
-  color: #00ff00;
-  font-family: 'Fira Code', monospace;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-}
-
-#terminal {
-  background: #001100dd;
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow:
-    0 0 15px #00ff00cc,
-    0 0 30px #00ff00bb,
-    0 0 45px #00ff00aa;
-  width: 90%;
-  max-width: 750px;
-  min-height: 400px;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #00ff00aa;
-}
-
-.line {
-  white-space: pre-wrap;
-  font-size: 1.4em;
-  line-height: 1.6em;
-  font-weight: 700;
-  text-shadow:
-    0 0 5px #00ff00,
-    0 0 10px #00ff00,
-    0 0 20px #00ff00aa;
-}
-
-#cursor {
-  display: inline-block;
-  width: 14px;
-  height: 24px;
-  background-color: #00ff00;
-  margin-left: 5px;
-  border-radius: 3px;
-  box-shadow:
-    0 0 8px #00ff00,
-    0 0 15px #00ff00,
-    0 0 25px #00ff00bb;
-  animation: pulse 1s ease-in-out infinite;
-  position: relative;
-  top: 4px;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    box-shadow:
-      0 0 8px #00ff00,
-      0 0 15px #00ff00,
-      0 0 25px #00ff00bb;
+/* Матрица на фоне */
+#matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background: black;
+    display: block;
   }
-  50% {
-    opacity: 0.4;
-    box-shadow:
-      0 0 4px #00ff00,
-      0 0 7px #00ff00,
-      0 0 12px #00ff00aa;
+  
+  /* Терминал поверх матрицы */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
   }
-}
+  
+  #terminal {
+    position: relative;
+    z-index: 1;
+    width: 95%;
+    max-width: 900px;
+    height: 90vh;
+    margin: auto;
+    background-color: rgba(0,0,0,0.8);
+    border: 1px solid #33ff33;
+    padding: 20px;
+    box-shadow: 0 0 15px #0f0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #33ff33;
+  }
+  
+  #output {
+    flex-grow: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #33ff33 #000;
+  }
+  
+  #output::-webkit-scrollbar {
+    width: 8px;
+  }
+  #output::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #output::-webkit-scrollbar-thumb {
+    background-color: #33ff33;
+    border-radius: 4px;
+    border: 1px solid #0f0;
+  }
+  
+  #input-line {
+    display: flex;
+    align-items: center;
+  }
+  
+  .prompt {
+    color: #0f0;
+    margin-right: 8px;
+    user-select: none;
+  }
+  
+  #command-input {
+    background: transparent;
+    border: none;
+    color: #33ff33;
+    outline: none;
+    font: inherit;
+    flex-grow: 1;
+  }
+  
+  #command-input::placeholder {
+    color: #0f0;
+  }
+  
+  /* Мигающий курсор */
+  .cursor {
+    color: #33ff33;
+    font-weight: bold;
+    animation: blink 1s steps(2, start) infinite;
+    user-select: none;
+    margin-left: 2px;
+  }
+  
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+  
+  .log-line {
+    color: #33ff33;
+  }
+  
+  .command {
+    color: #33ff33;
+  }
+  
+  .error {
+    color: #ff5555;
+  }
+  
+  .success {
+    color: #55ff55;
+  }
+  
+/* Кастомный зелёный скроллбар для терминала */
+#terminal::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #terminal::-webkit-scrollbar-track {
+    background: #000; /* фон скролл-трека */
+  }
+  
+  #terminal {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE и Edge */
+  }
+  
+  #terminal::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+  
+/* Кастомный зелёный скроллбар для терминала */
+#terminal::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #terminal::-webkit-scrollbar-track {
+    background: #000; /* фон скролл-трека */
+  }
+  
+  #terminal::-webkit-scrollbar-thumb {
+    background-color: #33ff33; /* зелёный "ползунок" */
+    border-radius: 4px;
+    border: 1px solid #0f0;
+  }
+  
+  /* Для Firefox */
+  #terminal {
+    scrollbar-width: thin;
+    scrollbar-color: #33ff33 #000;
+  }
+  
+  
+  #output a {
+    color: #0f0;          /* зелёный цвет */
+    text-decoration: none; /* убрать подчеркивание */
+  }
+  
+  #output {
+    text-decoration: none; /* чтобы обычный текст не был подчеркнут */
+  }
+  
