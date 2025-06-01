@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hacker Terminal | Abdulaziz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <div id="terminal">
+    <div id="output"></div>
+    <div id="input-line">
+      <span class="prompt">[root@abdulaziz ~]#</span>
+      <input type="text" id="command-input" autofocus autocomplete="off" />
+      <span class="cursor">|</span>
+    </div>
+  </div>
+
+  <script src="js/matrix.js"></script>
+  <script src="js/terminal.js"></script>
+</body>
+</html>
