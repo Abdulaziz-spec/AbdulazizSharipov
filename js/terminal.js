@@ -162,23 +162,14 @@ commands["decrypt_message.txt"] = `
   
   
 function typeLog(text, className = 'command', callback) {
-  let i = 0;
-  const div = document.createElement('div');
-  div.className = className;
-  output.appendChild(div);
-
-  function type() {
-    if (i < text.length) {
-      div.textContent += text.charAt(i);
-      i++;
-      output.scrollTop = output.scrollHeight;
-      setTimeout(type, typingSpeed / fastMode);
-    } else if (callback) {
-      callback();
-    }
+    const div = document.createElement('div');
+    div.className = className;
+    div.innerHTML = text;  // выводим как HTML, а не как plain text
+    output.appendChild(div);
+    output.scrollTop = output.scrollHeight;
+    if (callback) callback();
   }
-  type();
-}
+  
 
 function fakeLS(callback) {
   const files = [
